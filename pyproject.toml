@@ -1,0 +1,17 @@
+[project]
+name = "apcl"
+version = "0.1.0"
+requires-python = ">=3.10"
+dependencies = [
+  "numpy",
+  "torch",
+  "torchlibrosa",
+  "tqdm",
+  "soundfile"
+]
+
+[project.scripts]
+apcl-infer-wavs = "apcl.infer_wavs:main"
+
+[tool.setuptools.packages.find]
+include = ["apcl*"]

@@ -1,0 +1,98 @@
+{
+  "data": {
+    "dataset": "dataset_b",
+    "dataset_a_root": "/mnt/lynx1/datasets/NISR",
+    "dataset_b_root": "/mnt/lynx1/datasets/NISR",
+    "include_rand": true,
+    "include_blend": true,
+    "complete_object_ids_file": "splits/blend_completed_object_ids_latest.txt",
+    "train_ratio": 0.8,
+    "val_ratio": 0.1,
+    "split_seed": 42,
+    "train_k": 4,
+    "train_k_values": [1, 2, 4, 8],
+    "eval_k_values": [1, 2, 4, 8],
+    "sample_rate": 32000,
+    "clip_seconds": 2.0,
+    "material_holdout": {
+      "enabled": false,
+      "held_out_materials": [],
+      "exclude_from_normalization": false,
+      "remove_from_anchor_candidates": false,
+      "remove_from_class_space": false
+    },
+    "source_sampling": {
+      "name": "source_ratio_balanced",
+      "rand_weight": 1.0,
+      "blend_weight": 1.0,
+      "balance_blend_ratios": true,
+      "balance_blend_pairs": false
+    }
+  },
+  "model": {
+    "audio_encoder": {
+      "type": "pann",
+      "repo_root": "/home/hbcho/3D/audioset_tagging_cnn",
+      "checkpoint_path": "/home/hbcho/3D/audioset_tagging_cnn/Cnn14_mAP=0.431.pth",
+      "freeze": false
+    },
+    "pann_repo_root": "/home/hbcho/3D/audioset_tagging_cnn",
+    "pann_checkpoint_path": "/home/hbcho/3D/audioset_tagging_cnn/Cnn14_mAP=0.431.pth",
+    "freeze_audio_encoder": false,
+    "audio_dim": 512,
+    "projection_dim": 128,
+    "audio_projection_hidden_dim": 256,
+    "param_encoder_hidden_dim": 64,
+    "prediction_mode": "direct",
+    "dropout": 0.1,
+    "eta_reference_hz": 1000.0,
+    "target_names": ["log_E", "log_rho", "nu", "log_alpha", "log_beta"],
+    "predict_uncertainty": false
+  },
+  "optim": {
+    "epochs": 200,
+    "batch_size": 128,
+    "lr": 0.0001,
+    "weight_decay": 0.0001,
+    "num_workers": 4,
+    "min_lr": 5e-06
+  },
+  "loss": {
+    "reg_weight": 1.0,
+    "reg_target_weights": {"log_E": 1.5, "log_rho": 1.5, "nu": 1.2, "log_alpha": 1.0, "log_beta": 1.0},
+    "cls_weight": 0.25,
+    "cls_weight_schedule": [],
+    "anchor_reg_weight": 0.0,
+    "direct_anchor_consistency_weight": 0.0,
+    "direct_anchor_consistency_detach_anchor": true,
+    "blend_latent_consistency_weight": 0.05,
+    "blend_param_consistency_weight": 0.0,
+    "blend_prediction_consistency_weight": 0.1,
+    "rand_endpoint_consistency_weight": 0.0,
+    "uncertainty_regression_weight": 0.0,
+    "sample_reweighting": {"enabled": false},
+    "param_contrast_weight": 0.0,
+    "audio_param_weight": 0.0,
+    "latent_mix_weight": 0.0,
+    "multi_impact_weight": 0.0,
+    "warmup_epochs": 30,
+    "contrast_sigma": 1.0,
+    "contrast_temperature": 0.1
+  },
+  "runtime": {
+    "seed": 42,
+    "output_root": "/mnt/bear2/users/hbcho/APCL",
+    "run_name": "dataset_b_08_d_v1_blend_cls025_no_holdout_logab_ratio_k4_b128_e200",
+    "device": "cuda",
+    "use_wandb": true,
+    "wandb_entity": "nisr",
+    "wandb_project": "apcl-dataset-b-08-no-holdout",
+    "wandb_run_name": "dataset_b_08_d_v1_blend_cls025_no_holdout_logab_ratio_k4_b128_e200"
+  },
+  "test": {
+    "dataset_a_root": "/mnt/lynx1/datasets/NISR",
+    "dataset_b_root": "/mnt/lynx1/datasets/NISR",
+    "checkpoint_name": "best.pt",
+    "output_dir": "test_dataset_b_08"
+  }
+}

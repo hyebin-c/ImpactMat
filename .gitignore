@@ -1,0 +1,44 @@
+# Python/cache
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Local environments
+.env
+.venv/
+venv/
+
+# Experiment outputs
+logs/
+pids/
+wandb/
+outputs/
+checkpoints/*
+!checkpoints/
+!checkpoints/README.md
+*.pt
+*.pth
+*.ckpt
+
+# Dataset/audio artifacts
+data/
+datasets/
+*.wav
+*.flac
+*.mp3
+
+# Run directories: ignore metrics/checkpoints, keep curated config sets.
+runs/*
+!runs/*/
+runs/*/*
+!runs/*/recommended_configs/
+!runs/*/recommended_configs/*.json
+!runs/*/apcl02_configs/
+!runs/*/apcl02_configs/*.json
+
+# Editor/OS noise
+.DS_Store
+.idea/
+.vscode/

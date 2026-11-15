@@ -33,12 +33,12 @@ DEFAULT_INFERENCE_CONFIG: dict[str, Any] = {
     "model": {
         "audio_encoder": {
             "type": "pann",
-            "repo_root": "/home/hbcho/3D/audioset_tagging_cnn",
-            "checkpoint_path": "/home/hbcho/3D/audioset_tagging_cnn/Cnn14_mAP=0.431.pth",
+            "repo_root": "third_party/audioset_tagging_cnn",
+            "checkpoint_path": "checkpoints/Cnn14_mAP=0.431.pth",
             "freeze": True,
         },
-        "pann_repo_root": "/home/hbcho/3D/audioset_tagging_cnn",
-        "pann_checkpoint_path": "/home/hbcho/3D/audioset_tagging_cnn/Cnn14_mAP=0.431.pth",
+        "pann_repo_root": "third_party/audioset_tagging_cnn",
+        "pann_checkpoint_path": "checkpoints/Cnn14_mAP=0.431.pth",
         "freeze_audio_encoder": True,
         "audio_dim": 512,
         "projection_dim": 128,
@@ -196,7 +196,7 @@ def _patch_encoder_paths(checkpoint: dict[str, Any], pann_repo_root: str | None,
 def _load_checkpoint(path: str, device: torch.device) -> dict[str, Any]:
     checkpoint = torch.load(path, map_location=device)
     if not isinstance(checkpoint, dict) or "model" not in checkpoint:
-        raise ValueError(f"Checkpoint {path} does not look like an APCL train.py checkpoint.")
+        raise ValueError(f"Checkpoint {path} does not look like an ImpactMat training checkpoint.")
     return checkpoint
 
 

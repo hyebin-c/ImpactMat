@@ -417,7 +417,7 @@ def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--dataset", choices=["objectfolder", "realimpact"], required=True)
     parser.add_argument("--root", required=True)
-    parser.add_argument("--material-csv", default="/mnt/bear2/users/hbcho/ObjectFolder_Real/object_materials.csv")
+    parser.add_argument("--material-csv", required=True)
     parser.add_argument("--run-dir", required=True)
     parser.add_argument("--checkpoint-name", default="best.pt")
     parser.add_argument("--output-dir", required=True)

@@ -33,9 +33,9 @@ except ImportError:  # pragma: no cover - optional dependency
 
 DEFAULT_CONFIG: dict[str, Any] = {
     "data": {
-        "dataset_a_root": "/mnt/lynx1/datasets/NISR",
+        "dataset_a_root": "data/impactmat",
         "dataset": "dataset_a",
-        "dataset_b_root": "/mnt/lynx1/datasets/NISR",
+        "dataset_b_root": "data/impactmat",
         "include_rand": True,
         "include_blend": False,
         "complete_object_ids_file": None,
@@ -72,8 +72,8 @@ DEFAULT_CONFIG: dict[str, Any] = {
     "model": {
         "audio_encoder": {
             "type": "pann",
-            "repo_root": "/home/hbcho/3D/audioset_tagging_cnn",
-            "checkpoint_path": "/home/hbcho/3D/audioset_tagging_cnn/Cnn14_mAP=0.431.pth",
+            "repo_root": "third_party/audioset_tagging_cnn",
+            "checkpoint_path": "checkpoints/Cnn14_mAP=0.431.pth",
             "freeze": True,
             "pretrained_model_name": "",
             "sample_rate": 16000,
@@ -83,8 +83,8 @@ DEFAULT_CONFIG: dict[str, Any] = {
             "pooling": "mean",
             "trust_remote_code": True,
         },
-        "pann_repo_root": "/home/hbcho/3D/audioset_tagging_cnn",
-        "pann_checkpoint_path": "/home/hbcho/3D/audioset_tagging_cnn/Cnn14_mAP=0.431.pth",
+        "pann_repo_root": "third_party/audioset_tagging_cnn",
+        "pann_checkpoint_path": "checkpoints/Cnn14_mAP=0.431.pth",
         "freeze_audio_encoder": True,
         "audio_dim": 512,
         "projection_dim": 128,
@@ -1228,7 +1228,7 @@ def evaluate(model: APCLModel, loader: DataLoader, target_table_norm: torch.Tens
 
 def main() -> None:
     parser = argparse.ArgumentParser()
-    parser.add_argument("--config", default="configs/dataset_b_08_no_holdout/f_v1_blend_cls025_contrast001_k4_b128_e200.json")
+    parser.add_argument("--config", default="configs/impactmat/default.json")
     parser.add_argument("--resume", default=None, help="Path to a checkpoint saved by train.py, usually latest.pt.")
     parser.add_argument("--use-wandb", action="store_true")
     parser.add_argument("--wandb-entity", default=None)

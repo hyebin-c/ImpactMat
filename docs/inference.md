@@ -1,6 +1,6 @@
-# Inference-Only Setup With uv
+# Inference
 
-This path is for users who only want to download an APCL checkpoint and run
+This path is for users who only want to download an ImpactMat checkpoint and run
 inference on wav files. Training dependencies, W&B, and Dataset B generation are
 not required.
 
@@ -8,9 +8,9 @@ not required.
 
 You need:
 
-- this APCL repository
+- this ImpactMat repository
 - an ImpactMat checkpoint, usually `impactmat.pt`
-- the PANN CNN14 source repository used by APCL
+- the PANN CNN14 source repository used by ImpactMat
 - the PANN CNN14 pretrained checkpoint, usually `Cnn14_mAP=0.431.pth`
 - one or more input wav files
 
@@ -27,7 +27,7 @@ checkpoints/
   impactmat-blend-real-noise.pt
 ```
 
-The APCL checkpoint stores the original absolute PANN paths from training. If
+Older checkpoints may store the original absolute PANN paths from training. If
 your local paths differ, pass `--pann-repo-root` and `--pann-checkpoint-path`.
 
 ## Environment
@@ -57,7 +57,7 @@ uv pip install -e .
 ```
 
 If torch and the other dependencies are already present in an existing
-environment and you only want to verify APCL packaging/entry points:
+environment and you only want to verify ImpactMat packaging/entry points:
 
 ```bash
 uv pip install -e . --no-deps
@@ -112,7 +112,7 @@ apcl-infer-wavs \
   --pann-checkpoint-path checkpoints/Cnn14_mAP=0.431.pth
 ```
 
-`material` is optional. If provided and it matches one of the eight APCL
+`material` is optional. If provided and it matches one of the eight ImpactMat
 materials, the output also includes simple correctness and normalized-error
 columns.
 

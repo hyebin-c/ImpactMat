@@ -17,11 +17,11 @@ impact-sound renderer and dataset-generation pipeline used by the project.
 Renderer setup and examples are documented in
 [`renderer/README.md`](renderer/README.md).
 
-## APCL Estimator
+## Estimator
 
-This repository is curated around the Dataset B 08 D/F experiments and
-checkpoint-only inference. Training code is kept for reproducibility, but the
-easiest reuse path is:
+The estimator predicts continuous material parameters from one or more impact
+sounds. Training code is included for reproducibility, while the easiest reuse
+path is checkpoint-only inference:
 
 1. Clone this repository.
 2. Download the shared checkpoints into `checkpoints/`.
@@ -72,29 +72,19 @@ Outputs are written as:
 - `predictions.csv`
 - `predictions.json`
 
-See [`docs/inference_uv.md`](docs/inference_uv.md) for manifest input,
+See [`docs/inference.md`](docs/inference.md) for manifest input,
 multi-hit inference, and CPU/GPU notes.
 
-## Curated Dataset B 08 D/F Runs
+## Released Models
 
-The hand-off entry point is [`docs/dataset_b_08_d_f.md`](docs/dataset_b_08_d_f.md).
-It covers:
-
-- D and F base configs
-- real-noise training variants
-- synthetic Dataset B evaluation
-- ObjectFolder and RealImpact evaluation commands
-
-The key configs are:
-
-| Label | Config |
-| --- | --- |
-| D base | `configs/dataset_b_08_no_holdout/d_v1_blend_cls025_k4_b128_e200.json` |
-| F base | `configs/dataset_b_08_no_holdout/f_v1_blend_cls025_contrast001_k4_b128_e200.json` |
-| D noise1 | `configs/dataset_b_08_no_holdout/d_noise1_real_noise_k4_b128_e200.json` |
-| F noise1 | `configs/dataset_b_08_no_holdout/f_noise1_real_noise_k4_b128_e200.json` |
-| F noise2 | `configs/dataset_b_08_no_holdout/f_noise2_real_colored_eq_k4_b128_e200.json` |
-| F noise3 | `configs/dataset_b_08_no_holdout/f_noise3_real_colored_eq_shift_reverb_k4_b128_e200.json` |
+| Checkpoint | Config | Description |
+| --- | --- | --- |
+| `impactmat.pt` | `configs/impactmat/default.json` | Recommended model |
+| `impactmat-real-noise.pt` | `configs/impactmat/real_noise.json` | Real-noise augmentation |
+| `impactmat-colored-noise.pt` | `configs/impactmat/colored_noise.json` | Real and colored noise |
+| `impactmat-augmented.pt` | `configs/impactmat/augmented.json` | Full robustness augmentation |
+| `impactmat-blend.pt` | `configs/impactmat/blend.json` | Blend supervision without parameter contrastive loss |
+| `impactmat-blend-real-noise.pt` | `configs/impactmat/blend_real_noise.json` | Blend model with real-noise augmentation |
 
 The prediction target is:
 
@@ -104,10 +94,11 @@ The prediction target is:
 
 ## Training And Evaluation
 
-Train the curated Dataset B D/F variants:
+Training and evaluation are documented in
+[`docs/training.md`](docs/training.md). To train all released configurations:
 
 ```bash
-bash scripts/train_dataset_b_08_d_f.sh
+bash scripts/train_impactmat.sh
 ```
 
 Evaluate ObjectFolder or RealImpact outputs:

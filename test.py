@@ -250,7 +250,7 @@ def write_markdown(rows: list[dict[str, Any]], path: Path) -> None:
 
 def main() -> None:
     parser = argparse.ArgumentParser()
-    parser.add_argument("--config", default="configs/dataset_b_08_no_holdout/f_v1_blend_cls025_contrast001_k4_b128_e200.json")
+    parser.add_argument("--config", default="configs/impactmat/default.json")
     parser.add_argument("--run-dir", default=None)
     parser.add_argument("--checkpoint", default=None)
     parser.add_argument("--checkpoint-name", default=None)

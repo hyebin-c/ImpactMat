@@ -3,6 +3,8 @@
 Put downloaded checkpoint files here. The model weights are intentionally not
 tracked by Git.
 
+Google Drive download: _link will be added before the public release._
+
 Recommended filenames:
 
 ```text

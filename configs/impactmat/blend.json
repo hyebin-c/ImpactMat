@@ -1,11 +1,11 @@
 {
   "data": {
     "dataset": "dataset_b",
-    "dataset_a_root": "/mnt/lynx1/datasets/NISR",
-    "dataset_b_root": "/mnt/lynx1/datasets/NISR",
+    "dataset_a_root": "data/impactmat",
+    "dataset_b_root": "data/impactmat",
     "include_rand": true,
     "include_blend": true,
-    "complete_object_ids_file": "splits/blend_completed_object_ids_latest.txt",
+    "complete_object_ids_file": "splits/blend_completed_objects.txt",
     "train_ratio": 0.8,
     "val_ratio": 0.1,
     "split_seed": 42,
@@ -32,12 +32,12 @@
   "model": {
     "audio_encoder": {
       "type": "pann",
-      "repo_root": "/home/hbcho/3D/audioset_tagging_cnn",
-      "checkpoint_path": "/home/hbcho/3D/audioset_tagging_cnn/Cnn14_mAP=0.431.pth",
+      "repo_root": "third_party/audioset_tagging_cnn",
+      "checkpoint_path": "checkpoints/Cnn14_mAP=0.431.pth",
       "freeze": false
     },
-    "pann_repo_root": "/home/hbcho/3D/audioset_tagging_cnn",
-    "pann_checkpoint_path": "/home/hbcho/3D/audioset_tagging_cnn/Cnn14_mAP=0.431.pth",
+    "pann_repo_root": "third_party/audioset_tagging_cnn",
+    "pann_checkpoint_path": "checkpoints/Cnn14_mAP=0.431.pth",
     "freeze_audio_encoder": false,
     "audio_dim": 512,
     "projection_dim": 128,
@@ -81,18 +81,18 @@
   },
   "runtime": {
     "seed": 42,
-    "output_root": "/mnt/bear2/users/hbcho/APCL",
-    "run_name": "dataset_b_08_d_v1_blend_cls025_no_holdout_logab_ratio_k4_b128_e200",
+    "output_root": "runs",
+    "run_name": "impactmat-blend",
     "device": "cuda",
     "use_wandb": true,
-    "wandb_entity": "nisr",
-    "wandb_project": "apcl-dataset-b-08-no-holdout",
-    "wandb_run_name": "dataset_b_08_d_v1_blend_cls025_no_holdout_logab_ratio_k4_b128_e200"
+    "wandb_entity": null,
+    "wandb_project": "impactmat",
+    "wandb_run_name": "impactmat-blend"
   },
   "test": {
-    "dataset_a_root": "/mnt/lynx1/datasets/NISR",
-    "dataset_b_root": "/mnt/lynx1/datasets/NISR",
+    "dataset_a_root": "data/impactmat",
+    "dataset_b_root": "data/impactmat",
     "checkpoint_name": "best.pt",
-    "output_dir": "test_dataset_b_08"
+    "output_dir": "evaluation"
   }
 }

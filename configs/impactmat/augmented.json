@@ -1,11 +1,11 @@
 {
   "data": {
     "dataset": "dataset_b",
-    "dataset_a_root": "/mnt/lynx1/datasets/NISR",
-    "dataset_b_root": "/mnt/lynx1/datasets/NISR",
+    "dataset_a_root": "data/impactmat",
+    "dataset_b_root": "data/impactmat",
     "include_rand": true,
     "include_blend": true,
-    "complete_object_ids_file": "splits/blend_completed_object_ids_latest.txt",
+    "complete_object_ids_file": "splits/blend_completed_objects.txt",
     "train_ratio": 0.8,
     "val_ratio": 0.1,
     "split_seed": 42,
@@ -40,10 +40,10 @@
     },
     "audio_augmentation": {
       "enabled": true,
-      "probability": 0.75,
+      "probability": 0.85,
       "noise_paths": [
-        "/mnt/bear2/users/hbcho/ObjectFolder_Real/audio/*/audio/*/mic.wav",
-        "/mnt/bear2/users/hbcho/RealImpact_wavs_n8/*/*.wav"
+        "data/noise/objectfolder/**/*.wav",
+        "data/noise/realimpact/**/*.wav"
       ],
       "quiet_noise_fraction": 0.25,
       "real_noise_probability": 0.8,
@@ -54,11 +54,11 @@
       "colored_noise_probability": 0.45,
       "spectral_tilt_probability": 0.5,
       "time_shift_seconds_range": [
-        0.0,
-        0.0
+        -0.25,
+        0.65
       ],
-      "reverb_probability": 0.0,
-      "saturation_probability": 0.0,
+      "reverb_probability": 0.25,
+      "saturation_probability": 0.15,
       "colored_noise_kinds": [
         "pink",
         "brown",
@@ -72,18 +72,28 @@
       "spectral_tilt_db_per_octave_range": [
         -3.0,
         3.0
+      ],
+      "reverb_taps": 4,
+      "reverb_max_delay_seconds": 0.12,
+      "reverb_decay_range": [
+        0.12,
+        0.38
+      ],
+      "saturation_drive_range": [
+        1.1,
+        1.8
       ]
     }
   },
   "model": {
     "audio_encoder": {
       "type": "pann",
-      "repo_root": "/home/hbcho/3D/audioset_tagging_cnn",
-      "checkpoint_path": "/home/hbcho/3D/audioset_tagging_cnn/Cnn14_mAP=0.431.pth",
+      "repo_root": "third_party/audioset_tagging_cnn",
+      "checkpoint_path": "checkpoints/Cnn14_mAP=0.431.pth",
       "freeze": false
     },
-    "pann_repo_root": "/home/hbcho/3D/audioset_tagging_cnn",
-    "pann_checkpoint_path": "/home/hbcho/3D/audioset_tagging_cnn/Cnn14_mAP=0.431.pth",
+    "pann_repo_root": "third_party/audioset_tagging_cnn",
+    "pann_checkpoint_path": "checkpoints/Cnn14_mAP=0.431.pth",
     "freeze_audio_encoder": false,
     "audio_dim": 512,
     "projection_dim": 128,
@@ -141,19 +151,19 @@
   },
   "runtime": {
     "seed": 42,
-    "output_root": "/mnt/bear2/users/hbcho/APCL",
-    "run_name": "dataset_b_08_noise_f_noise2_real_colored_eq_no_holdout_logab_ratio_k4_b128_e200",
+    "output_root": "runs",
+    "run_name": "impactmat-augmented",
     "device": "cuda",
     "use_wandb": true,
-    "wandb_entity": "nisr",
-    "wandb_project": "apcl-dataset-b-08-no-holdout-noise",
-    "wandb_run_name": "dataset_b_08_noise_f_noise2_real_colored_eq_no_holdout_logab_ratio_k4_b128_e200",
-    "wandb_group": "dataset_b_08_noise_domain_gap"
+    "wandb_entity": null,
+    "wandb_project": "impactmat",
+    "wandb_run_name": "impactmat-augmented",
+    "wandb_group": "robustness"
   },
   "test": {
-    "dataset_a_root": "/mnt/lynx1/datasets/NISR",
-    "dataset_b_root": "/mnt/lynx1/datasets/NISR",
+    "dataset_a_root": "data/impactmat",
+    "dataset_b_root": "data/impactmat",
     "checkpoint_name": "best.pt",
-    "output_dir": "test_dataset_b_08_noise"
+    "output_dir": "evaluation"
   }
 }

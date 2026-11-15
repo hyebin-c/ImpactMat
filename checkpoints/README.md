@@ -8,24 +8,29 @@ Recommended filenames:
 ```text
 checkpoints/
   Cnn14_mAP=0.431.pth
-  dataset_b_08_d_base_best.pt
-  dataset_b_08_d_noise1_best.pt
-  dataset_b_08_f_base_best.pt
-  dataset_b_08_f_noise1_best.pt
-  dataset_b_08_f_noise2_best.pt
-  dataset_b_08_f_noise3_best.pt
+  impactmat.pt
+  impactmat-real-noise.pt
+  impactmat-colored-noise.pt
+  impactmat-augmented.pt
+  impactmat-blend.pt
+  impactmat-blend-real-noise.pt
 ```
 
 For most ad-hoc inference, start with:
 
 ```text
-dataset_b_08_f_base_best.pt
+impactmat.pt
 ```
 
 For real-world noisy recordings, also try:
 
 ```text
-dataset_b_08_f_noise1_best.pt
-dataset_b_08_f_noise2_best.pt
-dataset_b_08_f_noise3_best.pt
+impactmat-real-noise.pt
+impactmat-colored-noise.pt
+impactmat-augmented.pt
 ```
+
+The `impactmat-blend*.pt` checkpoints are the corresponding models without the
+additional parameter-contrastive objective. Training runs still save their
+internal snapshots as `best.pt` and `latest.pt`; the names above are the stable
+filenames used for public releases.

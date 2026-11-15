@@ -9,7 +9,7 @@ not required.
 You need:
 
 - this APCL repository
-- an APCL checkpoint, usually `best.pt`
+- an ImpactMat checkpoint, usually `impactmat.pt`
 - the PANN CNN14 source repository used by APCL
 - the PANN CNN14 pretrained checkpoint, usually `Cnn14_mAP=0.431.pth`
 - one or more input wav files
@@ -19,12 +19,12 @@ Put downloaded model files under the repo-local `checkpoints/` directory:
 ```text
 checkpoints/
   Cnn14_mAP=0.431.pth
-  dataset_b_08_d_base_best.pt
-  dataset_b_08_d_noise1_best.pt
-  dataset_b_08_f_base_best.pt
-  dataset_b_08_f_noise1_best.pt
-  dataset_b_08_f_noise2_best.pt
-  dataset_b_08_f_noise3_best.pt
+  impactmat.pt
+  impactmat-real-noise.pt
+  impactmat-colored-noise.pt
+  impactmat-augmented.pt
+  impactmat-blend.pt
+  impactmat-blend-real-noise.pt
 ```
 
 The APCL checkpoint stores the original absolute PANN paths from training. If
@@ -70,7 +70,7 @@ Treat multiple wavs as K hits from one object:
 
 ```bash
 apcl-infer-wavs \
-  --checkpoint checkpoints/dataset_b_08_f_base_best.pt \
+  --checkpoint checkpoints/impactmat.pt \
   --wav /path/to/hit_000.wav \
   --wav /path/to/hit_001.wav \
   --object-id sample_object \
@@ -104,7 +104,7 @@ Then run:
 
 ```bash
 apcl-infer-wavs \
-  --checkpoint checkpoints/dataset_b_08_f_base_best.pt \
+  --checkpoint checkpoints/impactmat.pt \
   --manifest inputs.csv \
   --output-dir inference_output \
   --device cuda \

@@ -442,8 +442,8 @@ def write_outputs(rows: list[dict[str, Any]], target_names: tuple[str, ...], out
 
 
 def main() -> None:
-    parser = argparse.ArgumentParser(description="Run APCL checkpoint inference on one or more wav files.")
-    parser.add_argument("--checkpoint", required=True, help="Path to APCL best.pt/latest.pt checkpoint.")
+    parser = argparse.ArgumentParser(description="Run ImpactMat checkpoint inference on one or more wav files.")
+    parser.add_argument("--checkpoint", required=True, help="Path to an ImpactMat checkpoint.")
     parser.add_argument("--wav", action="append", default=[], help="Input wav path or shell glob. Repeat for K-hit inference.")
     parser.add_argument("--manifest", default=None, help="CSV with wav_path and optional group_id/object_id/object/material columns.")
     parser.add_argument("--object-id", default="input", help="Object id used when --wav is supplied.")

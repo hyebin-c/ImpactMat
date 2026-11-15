@@ -51,14 +51,14 @@ Download checkpoint files into [`checkpoints/`](checkpoints/README.md):
 ```text
 checkpoints/
   Cnn14_mAP=0.431.pth
-  dataset_b_08_f_base_best.pt
+  impactmat.pt
 ```
 
 Then run:
 
 ```bash
 apcl-infer-wavs \
-  --checkpoint checkpoints/dataset_b_08_f_base_best.pt \
+  --checkpoint checkpoints/impactmat.pt \
   --wav /path/to/impact.wav \
   --object-id sample_object \
   --output-dir inference_output \

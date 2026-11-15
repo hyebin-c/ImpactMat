@@ -1,0 +1,33 @@
+# Default configuration. Every value below equals the built-in default, so this
+# file only needs to contain what you want to change.
+paths:
+  mesh_dir: data/meshes        # {mesh_dir}/{obj_id}/{mesh_file}
+  mesh_file: model.obj
+  out_dir: outputs             # {out_dir}/{obj_id}/{voxel.npz, modal/, feat/, wav/}
+
+voxel:
+  resolution: 32
+  backend: cpu                 # "cpu" (numba, no GPU needed) or "cuda" (pycuda)
+  object_length: 0.15          # physical size of the normalized object [m]
+
+fem:
+  num_modes: 20
+  num_rigid_modes: 6
+  seed: null                   # set an int for repeatable eigen-solves
+  save_modal: true
+
+audio:
+  sample_rate: 44100
+  duration: 2.0
+  min_freq: 20.0
+  max_freq: 20000.0
+
+hit:
+  index: 0                     # boundary-voxel index of the strike point
+  t_start: 0.0                 # float, or a list such as [0.0, 0.5] for several strikes
+  gain: 1.0
+
+# Add or override materials (units: kg/m^3, Pa, -, 1/s, s). The 8 base materials
+# (Ceramic, Glass, Wood, Plastic, Iron, Polycarbonate, Steel, Tin) are built in.
+materials: {}
+#  Rubber: {rho: 1100, E: 1.0e7, nu: 0.49, alpha: 100, beta: 1.0e-5}

@@ -1,0 +1,19 @@
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+build/
+dist/
+
+# generated data
+outputs/
+data/meshes/
+
+# checkpoints
+*.pt
+*.pth
+*.ckpt
+
+.vscode/
+.idea/
+.DS_Store

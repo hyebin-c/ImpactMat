@@ -1,7 +1,23 @@
-# APCL
+# ImpactMat
 
-Audio-Parameter Contrastive Learning for continuous material estimation from
-impact sounds.
+Continuous material estimation for inverse impact sound rendering.
+
+This repository combines the APCL material-parameter estimator with the modal
+impact-sound renderer and dataset-generation pipeline used by the project.
+
+## Repository Layout
+
+- `apcl/`: audio-to-material parameter estimator
+- `renderer/`: mesh voxelization, FEM modal analysis, dataset generation, and
+  modal impact-sound synthesis
+- `configs/`: curated APCL training configurations
+- `checkpoints/`: checkpoint download instructions
+- `docs/`: APCL inference and evaluation documentation
+
+Renderer setup and examples are documented in
+[`renderer/README.md`](renderer/README.md).
+
+## APCL Estimator
 
 This repository is curated around the Dataset B 08 D/F experiments and
 checkpoint-only inference. Training code is kept for reproducibility, but the

@@ -1,6 +1,7 @@
 # ImpactMat
 
-Continuous material estimation for inverse impact sound rendering.
+Official implementation of [ImpactMat](https://arxiv.org/abs/2610.07061):
+continuous material estimation for inverse impact sound rendering.
 
 This repository combines the APCL material-parameter estimator with the modal
 impact-sound renderer and dataset-generation pipeline used by the project.
@@ -10,8 +11,8 @@ impact-sound renderer and dataset-generation pipeline used by the project.
 - `apcl/`: audio-to-material parameter estimator
 - `renderer/`: mesh voxelization, FEM modal analysis, dataset generation, and
   modal impact-sound synthesis
-- `configs/`: curated APCL training configurations
-- `checkpoints/`: checkpoint download instructions
+- `configs/`: paper-model training configuration
+- `checkpoints/`: paper checkpoint download instructions
 - `docs/`: APCL inference and evaluation documentation
 
 Renderer setup and examples are documented in
@@ -24,7 +25,7 @@ sounds. Training code is included for reproducibility, while the easiest reuse
 path is checkpoint-only inference:
 
 1. Clone this repository.
-2. Download the shared checkpoints into `checkpoints/`.
+2. Download the released checkpoint into `checkpoints/`.
 3. Set up a `uv` environment.
 4. Run `apcl-infer-wavs` on your wav files.
 
@@ -75,16 +76,15 @@ Outputs are written as:
 See [`docs/inference.md`](docs/inference.md) for manifest input,
 multi-hit inference, and CPU/GPU notes.
 
-## Released Models
+## Released Model
 
 | Checkpoint | Config | Description |
 | --- | --- | --- |
-| `impactmat.pt` | `configs/impactmat/default.json` | Recommended model |
-| `impactmat-real-noise.pt` | `configs/impactmat/real_noise.json` | Real-noise augmentation |
-| `impactmat-colored-noise.pt` | `configs/impactmat/colored_noise.json` | Real and colored noise |
-| `impactmat-augmented.pt` | `configs/impactmat/augmented.json` | Full robustness augmentation |
-| `impactmat-blend.pt` | `configs/impactmat/blend.json` | Blend supervision without parameter contrastive loss |
-| `impactmat-blend-real-noise.pt` | `configs/impactmat/blend_real_noise.json` | Blend model with real-noise augmentation |
+| `impactmat.pt` | `configs/impactmat/default.json` | Paper model trained with single- and blended-material supervision |
+
+`Single` and `Blend` in the paper are evaluation subsets of this same model,
+not separate checkpoints. The public checkpoint corresponds to the paper model
+used for the main results in Tables 2--4.
 
 The prediction target is:
 
@@ -95,7 +95,7 @@ The prediction target is:
 ## Training And Evaluation
 
 Training and evaluation are documented in
-[`docs/training.md`](docs/training.md). To train all released configurations:
+[`docs/training.md`](docs/training.md). To train the paper model:
 
 ```bash
 bash scripts/train_impactmat.sh

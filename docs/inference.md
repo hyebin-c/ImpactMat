@@ -9,7 +9,7 @@ not required.
 You need:
 
 - this ImpactMat repository
-- an ImpactMat checkpoint, usually `impactmat.pt`
+- the released ImpactMat checkpoint, `impactmat.pt`
 - the PANN CNN14 source repository used by ImpactMat
 - the PANN CNN14 pretrained checkpoint, usually `Cnn14_mAP=0.431.pth`
 - one or more input wav files
@@ -20,12 +20,10 @@ Put downloaded model files under the repo-local `checkpoints/` directory:
 checkpoints/
   Cnn14_mAP=0.431.pth
   impactmat.pt
-  impactmat-real-noise.pt
-  impactmat-colored-noise.pt
-  impactmat-augmented.pt
-  impactmat-blend.pt
-  impactmat-blend-real-noise.pt
 ```
+
+The same checkpoint is used for both single-material and blended-material
+inputs. These names describe dataset subsets in the paper, not separate models.
 
 Older checkpoints may store the original absolute PANN paths from training. If
 your local paths differ, pass `--pann-repo-root` and `--pann-checkpoint-path`.

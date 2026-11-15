@@ -2,33 +2,28 @@
 
 ImpactMat estimates the continuous parameter vector
 `[log_E, log_rho, nu, log_alpha, log_beta]` from one or more impact sounds.
-The released configurations share the same estimator and differ only in their
-contrastive objective or audio augmentation.
+The public configuration reproduces the model used for the paper's main
+results.
 
-## Configurations
+## Paper configuration
 
 | Model | Config | Public checkpoint |
 | --- | --- | --- |
 | ImpactMat | `configs/impactmat/default.json` | `impactmat.pt` |
-| Real-noise robust | `configs/impactmat/real_noise.json` | `impactmat-real-noise.pt` |
-| Colored-noise robust | `configs/impactmat/colored_noise.json` | `impactmat-colored-noise.pt` |
-| Fully augmented | `configs/impactmat/augmented.json` | `impactmat-augmented.pt` |
-| Blend objective | `configs/impactmat/blend.json` | `impactmat-blend.pt` |
-| Blend + real noise | `configs/impactmat/blend_real_noise.json` | `impactmat-blend-real-noise.pt` |
 
-`default.json` is the recommended training configuration. The two blend
-configurations omit the additional parameter-contrastive and audio-parameter
-contrastive losses. The robustness variants progressively add real recordings,
-colored noise, spectral tilt, time shift, light reverb, and saturation.
+This model is trained jointly on single- and blended-material examples. It uses
+direct parameter regression, auxiliary material classification, blend-only
+regression, and latent blend consistency. `Single`, `Blend`, and `All` in the
+paper report different test subsets for this model rather than separate model
+variants. The loss weights follow the paper: classification `0.25`, blend-only
+regression `0.10`, and latent blend consistency `0.05`.
 
 ## Data layout
 
-The public configs use repository-relative paths:
+The public config uses repository-relative paths:
 
 ```text
 data/impactmat/                         synthetic single and blended impacts
-data/noise/objectfolder/                optional real-noise recordings
-data/noise/realimpact/                  optional real-noise recordings
 third_party/audioset_tagging_cnn/       PANN CNN14 source
 checkpoints/Cnn14_mAP=0.431.pth         PANN pretrained weights
 ```
@@ -39,22 +34,16 @@ elsewhere. The generated ImpactMat dataset and renderer are documented under
 
 ## Training
 
-Train the recommended model:
+Train the paper model directly:
 
 ```bash
 python train.py --config configs/impactmat/default.json
 ```
 
-Train every released configuration:
+Or use the convenience script:
 
 ```bash
 bash scripts/train_impactmat.sh
-```
-
-Or select a subset:
-
-```bash
-CONFIG_FILTER="DEFAULT REAL_NOISE AUGMENTED" bash scripts/train_impactmat.sh
 ```
 
 Useful overrides:
@@ -65,9 +54,9 @@ PYTHON_BIN=python
 EXTRA_ARGS="--use-wandb"
 ```
 
-Each run writes its internal snapshots to `runs/<run_name>/best.pt` and
-`runs/<run_name>/latest.pt`. Public release artifacts use the stable filenames
-in the configuration table above.
+The run writes its internal snapshots to `runs/impactmat/best.pt` and
+`runs/impactmat/latest.pt`. Rename the selected `best.pt` to `impactmat.pt` for
+public distribution.
 
 ## Synthetic evaluation
 
